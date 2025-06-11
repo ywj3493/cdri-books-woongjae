@@ -4,4 +4,15 @@
 
 @theme {
   --font-display: "Noto Sans KR", sans-serif;
+
+  --color-cdri-primary: #4880ee;
+  --color-cdri-red: #e84118;
+  --color-cdri-gray: #dadada;
+  --color-cdri-light-gray: #f2f4f6;
+  --color-cdri-white: #ffffff;
+  --color-cdri-black: #222222;
+
+  --text-cdri-primary: #353c49;
+  --text-cdri-secondary: #6d7582;
+  --text-cdri-subtitle: #8d94a0;
 }
