@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
 
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme {
-    --font-display: 'Noto Sans KR', sans-serif;
+  --font-display: "Noto Sans KR", sans-serif;
 }
