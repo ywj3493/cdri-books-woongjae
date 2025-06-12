@@ -1,20 +1,23 @@
-import { SearchBooks } from "@/pages/books/search-books";
-import { Header } from "@/widgets/header";
-import { FavoriteBooks } from "@/pages/books/favorite-books";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { Header } from "@/widgets/header";
+import { Layout } from "@/widgets/layout";
+import { SearchBooksPage } from "@/pages/books/ui";
+import { FavoriteBooksPage } from "@/pages/favorites/ui";
 
 export default function App() {
   return (
-    <main className="font-display">
+    <main className="font-noto-sans-kr">
       <BrowserRouter
         future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
       >
         <Header />
-        <Routes>
-          <Route path="/" element={<Navigate to="/search" />} />
-          <Route path="/search" element={<SearchBooks />} />
-          <Route path="/favorites" element={<FavoriteBooks />} />
-        </Routes>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Navigate to="/search" />} />
+            <Route path="/search" element={<SearchBooksPage />} />
+            <Route path="/favorites" element={<FavoriteBooksPage />} />
+          </Routes>
+        </Layout>
       </BrowserRouter>
     </main>
   );
