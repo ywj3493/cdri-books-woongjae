@@ -1,5 +1,5 @@
-import { cn } from "./utils";
 import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/shared/utils";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center px-5 py-[13px] rounded-lg cursor-pointer",

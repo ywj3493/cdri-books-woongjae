@@ -1,4 +1,4 @@
-import { XIcon } from "@/shared/icons";
+import { XIcon } from "@/shared/ui";
 
 export function SearchHistoryItem({
   searchHistory,
