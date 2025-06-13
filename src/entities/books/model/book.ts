@@ -65,6 +65,7 @@ export class Book implements IBook {
   }
 
   get salePriceTag() {
+    if (!this.sale_price) return undefined;
     return `${this.sale_price.toLocaleString()}원`;
   }
 }
