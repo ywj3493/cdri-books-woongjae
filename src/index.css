@@ -10,9 +10,9 @@
   --color-cdri-white: #ffffff;
   --color-cdri-black: #222222;
 
-  --text-cdri-primary: #353c49;
-  --text-cdri-secondary: #6d7582;
-  --text-cdri-subtitle: #8d94a0;
+  --color-cdri-text-primary: #353c49;
+  --color-cdri-text-secondary: #6d7582;
+  --color-cdri-text-subtitle: #8d94a0;
 }
 
 @layer utilities {

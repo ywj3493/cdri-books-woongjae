@@ -1,6 +1,7 @@
 import type { KakaoBookDocument } from "@/features/books/types";
 import { Button } from "@/shared/button";
 import { Book } from "../model/book";
+import { ArrowIcon } from "@/shared/icons";
 
 interface BookItemProps {
   book: KakaoBookDocument;
@@ -19,8 +20,8 @@ export function BookItem({ book }: BookItemProps) {
       </div>
       <p className="text-cdri-title3 mr-16">{salePriceTag}</p>
       <Button variant="primary">구매하기</Button>
-      <Button variant="secondary" className="ml-2">
-        상세보기
+      <Button variant="secondary" className="ml-2 gap-1">
+        상세보기 <ArrowIcon className="mt-1" />
       </Button>
     </li>
   );
