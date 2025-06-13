@@ -1,11 +1,14 @@
 import { BookListItem } from "@/entities/books/ui";
-import { dummyResponse } from "../api/dummy";
+import type { Book } from "@/entities/books/model";
 
-export function BookList() {
-  const { documents: books } = dummyResponse;
+interface BookListProps {
+  bookList: Book[];
+}
+
+export function BookList({ bookList }: BookListProps) {
   return (
     <ul>
-      {books.map((book) => (
+      {bookList.map((book) => (
         <BookListItem key={book.isbn} book={book} />
       ))}
     </ul>

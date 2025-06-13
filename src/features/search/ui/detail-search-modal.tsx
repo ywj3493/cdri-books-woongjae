@@ -3,11 +3,19 @@ import { useOutsideClickEffect } from "@/shared/hooks";
 import { Button, XIcon } from "@/shared/ui";
 import { useRef, useState } from "react";
 
-export function DetailSearchModal() {
+interface DetailSearchModalProps {
+  onSearch?: (
+    keyword: string,
+    selected: "title" | "author" | "publisher",
+  ) => void;
+}
+
+export function DetailSearchModal({ onSearch }: DetailSearchModalProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<"title" | "author" | "publisher">(
     "title",
   );
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
   const openModal = (e: React.MouseEvent) => {
@@ -17,6 +25,12 @@ export function DetailSearchModal() {
 
   const closeModal = () => {
     setIsOpen(false);
+  };
+
+  const detailSearchBooks = () => {
+    if (onSearch) {
+      onSearch(searchInputRef.current?.value ?? "", selected);
+    }
   };
 
   useOutsideClickEffect(modalRef, () => {
@@ -45,6 +59,7 @@ export function DetailSearchModal() {
             />
             <input
               type="text"
+              ref={searchInputRef}
               placeholder="검색어를 입력하세요"
               className="w-full mt-2 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cdri-primary"
               onFocus={() => {
@@ -58,10 +73,7 @@ export function DetailSearchModal() {
           <Button
             variant="primary"
             className="mt-4"
-            onClick={() => {
-              console.log("검색 실행");
-              closeModal();
-            }}
+            onClick={detailSearchBooks}
           >
             검색 하기
           </Button>

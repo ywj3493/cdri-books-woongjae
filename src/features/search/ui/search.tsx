@@ -12,8 +12,13 @@ const dummySearchHistory = [
   "자바스크립트 완벽 가이드",
 ];
 
-export function Search() {
+interface SearchProps {
+  onSearch?: (keyword: string) => void;
+}
+
+export function Search({ onSearch }: SearchProps) {
   const [isInputFocused, setIsInputFocused] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
   const searchContainerRef = useRef<HTMLDivElement | null>(null);
 
   const isDropdownOpen = isInputFocused && dummySearchHistory.length > 0;
@@ -23,6 +28,16 @@ export function Search() {
       setIsInputFocused(false);
     }
   });
+
+  const searchBooks = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key !== "Enter") {
+      return;
+    }
+    if (onSearch) {
+      onSearch(searchInputRef.current?.value ?? "");
+      setIsInputFocused(false);
+    }
+  };
 
   return (
     <div ref={searchContainerRef} className="relative max-w-120">
@@ -34,16 +49,18 @@ export function Search() {
         <SearchIcon />
         <input
           type="text"
+          ref={searchInputRef}
           placeholder="검색어를 입력하세요"
           className="focus:outline-none"
           onFocus={() => setIsInputFocused(true)}
+          onKeyDown={searchBooks}
         />
       </div>
       {isDropdownOpen && (
         <ul className="bg-cdri-light-gray rounded-b-[27px] absolute w-full max-h-96 overflow-y-auto z-10">
           {dummySearchHistory.map((history) => (
             <SearchHistoryItem
-              key={history}
+              key={`search-history-item-${history}`}
               searchHistory={history}
               onClick={(searchHistory) => {
                 console.log("Clicked:", searchHistory);
