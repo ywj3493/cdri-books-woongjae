@@ -9,6 +9,8 @@ const buttonVariants = cva(
         primary: "bg-cdri-primary text-cdri-white",
         secondary:
           "bg-cdri-light-gray text-cdri-caption text-cdri-text-secondary",
+        outline:
+          "bg-cdri-white text-cdri-text-subtitle border border-cdri-light-gray",
       },
       defaultVariants: {
         variant: "primary",
