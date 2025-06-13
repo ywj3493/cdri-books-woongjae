@@ -1,7 +1,6 @@
 import type { KakaoBookDocument } from "@/features/books/types";
-import { Button } from "@/shared/button";
+import { ArrowIcon, Button } from "@/shared/ui";
 import { Book } from "../model/book";
-import { ArrowIcon } from "@/shared/icons";
 
 interface BookItemProps {
   book: KakaoBookDocument;

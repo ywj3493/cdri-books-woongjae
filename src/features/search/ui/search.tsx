@@ -1,8 +1,8 @@
-import { SearchIcon } from "@/shared/icons";
+import { SearchIcon } from "@/shared/ui";
 import { useRef, useState } from "react";
-import { SearchHistoryItem } from "./search-history-item";
 import { cn } from "@/shared/utils";
 import { useOutsideClickEffect } from "@/shared/hooks/use-outside-click-effect";
+import { SearchHistoryItem } from "@/entities/search/ui";
 
 const dummySearchHistory = [
   "해리포터",
