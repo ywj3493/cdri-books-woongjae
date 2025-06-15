@@ -1,28 +1,29 @@
 import { XIcon } from "@/shared/ui";
-import { useSearchHistoryStore } from "../hooks";
-import { useSearchStore } from "@/features/search/hooks/use-search-store";
 
 interface SearchHistoryItemProps {
   searchHistory: string;
+  onClickHistory?: (searchHistory: string) => void;
+  onClickDelete?: (searchHistory: string) => void;
 }
 
-export function SearchHistoryItem({ searchHistory }: SearchHistoryItemProps) {
-  const { pageSearch } = useSearchStore();
-  const { removeSearchHistory } = useSearchHistoryStore();
-
+export function SearchHistoryItem({
+  searchHistory,
+  onClickHistory,
+  onClickDelete,
+}: SearchHistoryItemProps) {
   const enterToSearch = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
-      pageSearch();
+      onClickHistory?.(searchHistory);
     }
   };
 
   const defaultSearch = () => {
-    pageSearch(searchHistory);
+    onClickHistory?.(searchHistory);
   };
 
   const deleteSearchHistory = (event: React.MouseEvent) => {
     event.stopPropagation();
-    removeSearchHistory(searchHistory);
+    onClickDelete?.(searchHistory);
   };
 
   return (

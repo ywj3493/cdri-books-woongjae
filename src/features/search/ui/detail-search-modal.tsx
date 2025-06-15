@@ -3,6 +3,7 @@ import { useOutsideClickEffect } from "@/shared/hooks";
 import { Button, XIcon } from "@/shared/ui";
 import { useEffect, useRef, useState } from "react";
 import { useSearchStore } from "../hooks/use-search-store";
+import type { SearchTargetOptions } from "@/entities/search/types";
 
 export function DetailSearchModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +13,9 @@ export function DetailSearchModal() {
 
   const {
     modalInputValue,
+    modalSelectValue,
     setModalInputValue,
+    setModalSelectValue,
     modalSearch,
     resetPageSearchInput,
   } = useSearchStore();
@@ -30,6 +33,10 @@ export function DetailSearchModal() {
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setModalInputValue(event.target.value);
+  };
+
+  const changeModalSelectValue = (value: SearchTargetOptions) => {
+    setModalSelectValue(value);
   };
 
   const detailSearchBooks = () => {
@@ -62,7 +69,10 @@ export function DetailSearchModal() {
             <XIcon width={12} height={12} color={"gray"} onClick={closeModal} />
           </div>
           <div className="flex">
-            <DetailSearchSelect />
+            <DetailSearchSelect
+              selected={modalSelectValue}
+              onSelect={changeModalSelectValue}
+            />
             <input
               type="text"
               ref={searchInputRef}

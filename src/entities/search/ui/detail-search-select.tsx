@@ -2,13 +2,18 @@ import { useOutsideClickEffect } from "@/shared/hooks";
 import { ArrowIcon } from "@/shared/ui";
 import { Fragment, useRef, useState } from "react";
 import type { SearchTargetOptions } from "@/entities/search/types";
-import { useSearchStore } from "@/features/search/hooks/use-search-store";
 
-export function DetailSearchSelect() {
+interface DetailSearchSelectProps {
+  selected: SearchTargetOptions;
+  onSelect?: (option: SearchTargetOptions) => void;
+}
+
+export function DetailSearchSelect({
+  selected,
+  onSelect,
+}: DetailSearchSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const selectListRef = useRef<HTMLUListElement | null>(null);
-
-  const { modalSelectValue, setModalSelectValue } = useSearchStore();
 
   const selectOptionMap = {
     title: "제목",
@@ -22,7 +27,7 @@ export function DetailSearchSelect() {
   };
 
   const selectOption = (option: SearchTargetOptions) => {
-    setModalSelectValue(option);
+    onSelect?.(option);
     setIsOpen(false);
   };
 
@@ -37,7 +42,7 @@ export function DetailSearchSelect() {
         className="flex justify-between items-center w-25 p-2 border-b border-cdri-primary"
         onClick={openSelect}
       >
-        <span>{selectOptionMap[modalSelectValue]}</span>
+        <span>{selectOptionMap[selected]}</span>
         <ArrowIcon />
       </button>
       {isOpen && (
@@ -49,7 +54,7 @@ export function DetailSearchSelect() {
             (option) => {
               return (
                 <Fragment key={`detail-search-select-option-${option}`}>
-                  {option !== modalSelectValue && (
+                  {option !== selected && (
                     <li
                       onClick={(event) => {
                         event.stopPropagation();

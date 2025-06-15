@@ -4,15 +4,11 @@ import { cn } from "@/shared/utils";
 import { useOutsideClickEffect } from "@/shared/hooks";
 import { SearchHistoryItem } from "@/entities/search/ui";
 import { useSearchStore } from "../hooks/use-search-store";
-import { useSearchHistoryStore } from "@/entities/search/hooks";
+import { useSearchHistoryStore } from "../hooks/use-search-history-store";
 
 export function SearchInput() {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const searchContainerRef = useRef<HTMLDivElement | null>(null);
-
-  const { searchHistory, addSearchHistory } = useSearchHistoryStore();
-
-  const isDropdownOpen = isInputFocused && searchHistory.length > 0;
 
   const {
     pageInputValue,
@@ -20,6 +16,9 @@ export function SearchInput() {
     pageSearch,
     resetModalSearchInput,
   } = useSearchStore();
+  const { searchHistory, addSearchHistory } = useSearchHistoryStore();
+
+  const isDropdownOpen = isInputFocused && searchHistory.length > 0;
 
   const searchBooks = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key !== "Enter") {
@@ -40,6 +39,12 @@ export function SearchInput() {
   };
 
   const closeDropdown = () => {
+    setIsInputFocused(false);
+  };
+
+  const searchBooksWithHistory = (searchHistory: string) => {
+    setPageInputValue(searchHistory);
+    pageSearch();
     setIsInputFocused(false);
   };
 
@@ -69,6 +74,7 @@ export function SearchInput() {
             <SearchHistoryItem
               key={`search-history-item-${history}`}
               searchHistory={history}
+              onClickHistory={searchBooksWithHistory}
             />
           ))}
         </ul>
