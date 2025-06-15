@@ -1,1 +1,1 @@
-export * from "./favorites-empty";
+export * from "./image-with-favorite";

@@ -1,4 +1,5 @@
 import { Book } from "@/entities/books/model";
+import { EmptyBookList } from "@/entities/books/ui";
 import { useGetSearchBooksQuery } from "@/features/books";
 import { BookList } from "@/features/books/ui/book-list";
 import { useSearchStore } from "@/features/search/hooks/use-search-store";
@@ -16,11 +17,17 @@ export function SearchBooksPage() {
     searchTarget,
     {
       query: {
-        select: (data) => data.documents.map(Book.create),
+        select: (data) => ({
+          meta: data.meta,
+          documents: data.documents.map(Book.create),
+        }),
         enabled: !!searchKeyword,
       },
     },
   );
+
+  const isSearchEmpty =
+    !searchBooksData || searchBooksData.documents.length === 0;
 
   return (
     <section className="h-screen max-w-[960px] mx-auto p-4 flex flex-col gap-6">
@@ -34,12 +41,16 @@ export function SearchBooksPage() {
         <span>
           총{" "}
           <span className="text-cdri-primary">
-            {searchBooksData?.length || 0}
+            {searchBooksData?.meta.total_count || 0}
           </span>
           건
         </span>
       </p>
-      {searchBooksData && <BookList bookList={searchBooksData} />}
+      {isSearchEmpty ? (
+        <EmptyBookList message="검색된 결과가 없습니다." />
+      ) : (
+        <BookList bookList={searchBooksData.documents} />
+      )}
     </section>
   );
 }

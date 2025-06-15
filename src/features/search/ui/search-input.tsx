@@ -27,6 +27,9 @@ export function SearchInput() {
     }
     pageSearch();
     setIsInputFocused(false);
+    if (pageInputValue.trim() === "") {
+      return;
+    }
     addSearchHistory(pageInputValue);
   };
 

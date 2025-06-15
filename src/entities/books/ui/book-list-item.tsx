@@ -2,24 +2,39 @@ import type { KakaoBookDocument } from "@/features/books/types";
 import { ArrowIcon, Button } from "@/shared/ui";
 import { Book } from "../model/book";
 import { useState } from "react";
+import { FavoriteImage } from "@/entities/favorites/ui";
+import { DetailPrice } from "./detail-price";
 
 interface BookListItemProps {
   book: KakaoBookDocument;
+  isFavorite: boolean;
+  onToggleFavorite: (book: Book) => void;
 }
 
-export function BookListItem({ book }: BookListItemProps) {
+export function BookListItem({
+  book,
+  isFavorite,
+  onToggleFavorite,
+}: BookListItemProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const bookEntity = Book.create(book);
   const { title, authors, thumbnail, salePriceTag, priceTag, contents } =
-    Book.create(book);
+    bookEntity;
+
+  const toggleFavorite = () => {
+    onToggleFavorite?.(bookEntity);
+  };
 
   return (
     <li
       className={`grid grid-cols-[auto_1fr_auto] items-start border-b border-[#D2D6DA] pl-12 pr-4 px-4 pt-4 transition-all duration-300 ${isExpanded ? "h-[344px]" : "h-25"}`}
     >
       {/* 썸네일 부분 */}
-      <img
+      <FavoriteImage
         src={thumbnail}
         alt={title}
+        isFavorite={isFavorite}
+        onChangeFavorite={toggleFavorite}
         className={`transition-all duration-300 ${isExpanded ? "w-52.5 h-70" : "w-12 h-17"} object-cover`}
       />
       {/* 제목, 저자, 책 소개 부분 */}
@@ -53,18 +68,7 @@ export function BookListItem({ book }: BookListItemProps) {
           </Button>
 
           <div className="flex flex-col items-end gap-2">
-            <p className="text-xl flex items-center gap-2">
-              <span className="text-cdri-text-subtitle text-cdri-small">
-                원가
-              </span>{" "}
-              <span className="line-through">{priceTag}</span>
-            </p>
-            <p className="text-xl font-bold flex items-center gap-4">
-              <span className="text-cdri-text-subtitle text-cdri-small">
-                할인가
-              </span>{" "}
-              {salePriceTag}
-            </p>
+            <DetailPrice priceTag={priceTag} salePriceTag={salePriceTag} />
             <Button
               variant="primary"
               className={`w-60 ${isExpanded ? "" : "hidden"}`}
@@ -75,7 +79,9 @@ export function BookListItem({ book }: BookListItemProps) {
         </div>
       ) : (
         <div className="flex items-center">
-          <p className="text-cdri-title3 mr-16">{salePriceTag}</p>
+          <p className="text-cdri-title3 mr-16">
+            {salePriceTag ? salePriceTag : priceTag}
+          </p>
           <div>
             <Button
               variant="primary"
