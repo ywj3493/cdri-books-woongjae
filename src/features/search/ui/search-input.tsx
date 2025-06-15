@@ -4,20 +4,15 @@ import { cn } from "@/shared/utils";
 import { useOutsideClickEffect } from "@/shared/hooks";
 import { SearchHistoryItem } from "@/entities/search/ui";
 import { useSearchStore } from "../hooks/use-search-store";
-
-const dummySearchHistory = [
-  "해리포터",
-  "반지의 제왕",
-  "어린왕자",
-  "파이썬 프로그래밍",
-  "자바스크립트 완벽 가이드",
-];
+import { useSearchHistoryStore } from "@/entities/search/hooks";
 
 export function SearchInput() {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const searchContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const isDropdownOpen = isInputFocused && dummySearchHistory.length > 0;
+  const { searchHistory, addSearchHistory } = useSearchHistoryStore();
+
+  const isDropdownOpen = isInputFocused && searchHistory.length > 0;
 
   const {
     pageInputValue,
@@ -32,6 +27,7 @@ export function SearchInput() {
     }
     pageSearch();
     setIsInputFocused(false);
+    addSearchHistory(pageInputValue);
   };
 
   const changeDisplayInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,16 +65,10 @@ export function SearchInput() {
       </div>
       {isDropdownOpen && (
         <ul className="bg-cdri-light-gray rounded-b-[27px] absolute w-full max-h-96 overflow-y-auto z-10">
-          {dummySearchHistory.map((history) => (
+          {searchHistory.map((history) => (
             <SearchHistoryItem
               key={`search-history-item-${history}`}
               searchHistory={history}
-              onClick={(searchHistory) => {
-                console.log("Clicked:", searchHistory);
-              }}
-              onClickDelete={(searchHistory) => {
-                console.log("Deleted:", searchHistory);
-              }}
             />
           ))}
         </ul>
