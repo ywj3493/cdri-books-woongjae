@@ -13,7 +13,6 @@ export type SearchState = {
   searchKeyword: string;
   searchTarget?: SearchTargetOptions;
 };
-
 export type SearchActions = {
   setPageInputValue: (value: string) => void;
   setModalInputValue: (value: string) => void;
@@ -28,7 +27,6 @@ export type SearchStore = SearchState & SearchActions;
 export type SearchHistoryState = {
   searchHistory: string[];
 };
-
 export type SearchHistoryActions = {
   addSearchHistory: (keyword: string) => void;
   removeSearchHistory: (keyword: string) => void;
