@@ -9,8 +9,8 @@ export function SearchHistoryItem({
   onClick: (searchHistory: string) => void;
   onClickDelete: (searchHistory: string) => void;
 }) {
-  const enterToSearch = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
+  const enterToSearch = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
       onClick(searchHistory);
     }
   };
@@ -23,8 +23,8 @@ export function SearchHistoryItem({
     >
       <span className="text-sm">{searchHistory}</span>
       <XIcon
-        onClick={(e) => {
-          e.stopPropagation();
+        onClick={(event) => {
+          event.stopPropagation();
           onClickDelete(searchHistory);
         }}
       />

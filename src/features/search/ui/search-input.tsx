@@ -1,8 +1,9 @@
 import { SearchIcon } from "@/shared/ui";
 import { useRef, useState } from "react";
 import { cn } from "@/shared/utils";
-import { useOutsideClickEffect } from "@/shared/hooks/use-outside-click-effect";
+import { useOutsideClickEffect } from "@/shared/hooks";
 import { SearchHistoryItem } from "@/entities/search/ui";
+import { useSearchStore } from "../hooks/use-search-store";
 
 const dummySearchHistory = [
   "해리포터",
@@ -12,32 +13,41 @@ const dummySearchHistory = [
   "자바스크립트 완벽 가이드",
 ];
 
-interface SearchProps {
-  onSearch?: (keyword: string) => void;
-}
-
-export function Search({ onSearch }: SearchProps) {
+export function SearchInput() {
   const [isInputFocused, setIsInputFocused] = useState(false);
-  const searchInputRef = useRef<HTMLInputElement | null>(null);
   const searchContainerRef = useRef<HTMLDivElement | null>(null);
 
   const isDropdownOpen = isInputFocused && dummySearchHistory.length > 0;
 
-  useOutsideClickEffect(searchContainerRef, () => {
-    if (isInputFocused) {
-      setIsInputFocused(false);
-    }
-  });
+  const {
+    pageInputValue,
+    setPageInputValue,
+    pageSearch,
+    resetModalSearchInput,
+  } = useSearchStore();
 
-  const searchBooks = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key !== "Enter") {
+  const searchBooks = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key !== "Enter") {
       return;
     }
-    if (onSearch) {
-      onSearch(searchInputRef.current?.value ?? "");
-      setIsInputFocused(false);
-    }
+    pageSearch();
+    setIsInputFocused(false);
   };
+
+  const changeDisplayInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPageInputValue(event.target.value);
+  };
+
+  const openDropdownAndModalReset = () => {
+    resetModalSearchInput();
+    setIsInputFocused(true);
+  };
+
+  const closeDropdown = () => {
+    setIsInputFocused(false);
+  };
+
+  useOutsideClickEffect(searchContainerRef, closeDropdown);
 
   return (
     <div ref={searchContainerRef} className="relative max-w-120">
@@ -49,10 +59,11 @@ export function Search({ onSearch }: SearchProps) {
         <SearchIcon />
         <input
           type="text"
-          ref={searchInputRef}
+          value={pageInputValue}
           placeholder="검색어를 입력하세요"
           className="focus:outline-none"
-          onFocus={() => setIsInputFocused(true)}
+          onChange={changeDisplayInput}
+          onFocus={openDropdownAndModalReset}
           onKeyDown={searchBooks}
         />
       </div>
