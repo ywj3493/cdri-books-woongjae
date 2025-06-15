@@ -1,6 +1,6 @@
-import { EmptyBookList } from "@/entities/books/ui";
+import { EmptyBookList } from "@/entities/books";
 import { BookList } from "@/features/books";
-import { useFavoritesStore } from "@/features/favorites/hooks/use-favorites-store";
+import { useFavoritesStore } from "@/features/favorites";
 
 export function FavoriteBooksPage() {
   const { favorites } = useFavoritesStore();

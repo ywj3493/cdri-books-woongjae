@@ -1,5 +1,5 @@
-import { type SearchStore, SearchTargetOptions } from "@/entities/search/types";
 import { create } from "zustand";
+import { type SearchStore, SearchTargetOptions } from "@/entities/search";
 
 export const useSearchStore = create<SearchStore>((set, get) => ({
   // 화면에 보이는 검색어 상태 값

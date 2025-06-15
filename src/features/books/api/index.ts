@@ -2,7 +2,7 @@ import {
   KakaoSortTypes,
   type KakaoSearchBooksResponse,
   type KakaoSort,
-} from "@/features/books/types";
+} from "@/features/books";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const AUTHORIZATION = import.meta.env.VITE_KAKAO_REST_API_KEY;

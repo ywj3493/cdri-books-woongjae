@@ -1,6 +1,6 @@
-import type { FavoritesStore } from "@/entities/favorites/types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import type { FavoritesStore } from "@/entities/favorites";
 
 export const useFavoritesStore = create<FavoritesStore>()(
   persist(

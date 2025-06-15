@@ -1,10 +1,9 @@
-import { SearchIcon } from "@/shared/ui";
 import { useRef, useState } from "react";
+import { SearchIcon } from "@/shared/ui";
 import { cn } from "@/shared/utils";
 import { useOutsideClickEffect } from "@/shared/hooks";
-import { SearchHistoryItem } from "@/entities/search/ui";
-import { useSearchStore } from "../hooks/use-search-store";
-import { useSearchHistoryStore } from "../hooks/use-search-history-store";
+import { SearchHistoryItem } from "@/entities/search";
+import { useSearchHistoryStore, useSearchStore } from "../hooks";
 
 export function SearchInput() {
   const [isInputFocused, setIsInputFocused] = useState(false);

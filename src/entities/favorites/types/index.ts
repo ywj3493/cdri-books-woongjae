@@ -1,4 +1,4 @@
-import type { Book } from "@/entities/books/model";
+import type { Book } from "@/entities/books";
 
 export type FavoritesState = {
   favorites: Book[];
