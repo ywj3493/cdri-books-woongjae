@@ -1,5 +1,5 @@
 import { Book } from "@/entities/books/model";
-import { useGetSearchBooksQuery } from "@/features/books/api";
+import { useGetSearchBooksQuery } from "@/features/books";
 import { BookList } from "@/features/books/ui/book-list";
 import { useSearchStore } from "@/features/search/hooks/use-search-store";
 import { DetailSearchModal } from "@/features/search/ui/detail-search-modal";
