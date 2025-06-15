@@ -1,10 +1,10 @@
-import { Book } from "@/entities/books/model";
-import { EmptyBookList } from "@/entities/books/ui";
-import { useGetSearchBooksQuery } from "@/features/books";
-import { BookList } from "@/features/books/ui/book-list";
-import { useSearchStore } from "@/features/search/hooks/use-search-store";
-import { DetailSearchModal } from "@/features/search/ui/detail-search-modal";
-import { SearchInput } from "@/features/search/ui/search-input";
+import { Book, EmptyBookList } from "@/entities/books";
+import { BookList, useGetSearchBooksQuery } from "@/features/books";
+import {
+  DetailSearchModal,
+  SearchInput,
+  useSearchStore,
+} from "@/features/search";
 
 export function SearchBooksPage() {
   const { searchKeyword, searchTarget } = useSearchStore();

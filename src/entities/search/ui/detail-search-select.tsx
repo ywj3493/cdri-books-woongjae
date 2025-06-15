@@ -1,7 +1,7 @@
+import { Fragment, useRef, useState } from "react";
 import { useOutsideClickEffect } from "@/shared/hooks";
 import { ArrowIcon } from "@/shared/ui";
-import { Fragment, useRef, useState } from "react";
-import type { SearchTargetOptions } from "@/entities/search/types";
+import type { SearchTargetOptions } from "@/entities/search";
 
 interface DetailSearchSelectProps {
   selected: SearchTargetOptions;

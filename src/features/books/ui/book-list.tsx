@@ -1,6 +1,6 @@
-import { BookListItem } from "@/entities/books/ui";
-import type { Book } from "@/entities/books/model";
-import { useFavoritesStore } from "@/features/favorites/hooks/use-favorites-store";
+import { BookListItem } from "@/entities/books";
+import type { Book } from "@/entities/books";
+import { useFavoritesStore } from "@/features/favorites";
 
 interface BookListProps {
   bookList: Book[];

@@ -1,9 +1,11 @@
-import { DetailSearchSelect } from "@/entities/search/ui";
-import { useOutsideClickEffect } from "@/shared/hooks";
-import { Button, XIcon } from "@/shared/ui";
 import { useEffect, useRef, useState } from "react";
-import { useSearchStore } from "../hooks/use-search-store";
-import type { SearchTargetOptions } from "@/entities/search/types";
+import { Button, XIcon } from "@/shared/ui";
+import { useOutsideClickEffect } from "@/shared/hooks";
+import {
+  type SearchTargetOptions,
+  DetailSearchSelect,
+} from "@/entities/search";
+import { useSearchStore } from "../hooks";
 
 export function DetailSearchModal() {
   const [isOpen, setIsOpen] = useState(false);

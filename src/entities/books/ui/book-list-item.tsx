@@ -1,10 +1,9 @@
-import type { KakaoBookDocument } from "@/features/books/types";
-import { ArrowIcon, Button } from "@/shared/ui";
-import { Book } from "../model/book";
 import { useState } from "react";
-import { FavoriteImage } from "@/entities/favorites/ui";
+import type { KakaoBookDocument } from "@/features/books";
+import { ArrowIcon, Button } from "@/shared/ui";
+import { FavoriteImage } from "@/entities/favorites";
+import { Book } from "../model/book";
 import { DetailPrice } from "./detail-price";
-
 interface BookListItemProps {
   book: KakaoBookDocument;
   isFavorite: boolean;

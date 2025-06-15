@@ -1,6 +1,6 @@
-import type { SearchHistoryStore } from "@/entities/search/types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import type { SearchHistoryStore } from "@/entities/search";
 
 export const useSearchHistoryStore = create<SearchHistoryStore>()(
   persist(
