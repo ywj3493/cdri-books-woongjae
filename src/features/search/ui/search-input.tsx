@@ -16,7 +16,8 @@ export function SearchInput() {
     pageSearch,
     resetModalSearchInput,
   } = useSearchStore();
-  const { searchHistory, addSearchHistory } = useSearchHistoryStore();
+  const { searchHistory, addSearchHistory, removeSearchHistory } =
+    useSearchHistoryStore();
 
   const isDropdownOpen = isInputFocused && searchHistory.length > 0;
 
@@ -48,6 +49,10 @@ export function SearchInput() {
     setIsInputFocused(false);
   };
 
+  const deleteSearchHistory = (searchHistory: string) => {
+    removeSearchHistory(searchHistory);
+  };
+
   useOutsideClickEffect(searchContainerRef, closeDropdown);
 
   return (
@@ -75,6 +80,7 @@ export function SearchInput() {
               key={`search-history-item-${history}`}
               searchHistory={history}
               onClickHistory={searchBooksWithHistory}
+              onClickDelete={deleteSearchHistory}
             />
           ))}
         </ul>
