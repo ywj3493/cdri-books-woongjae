@@ -1,7 +1,7 @@
-import { type SearchState, SearchTargetOptions } from "@/entities/search/types";
+import { type SearchStore, SearchTargetOptions } from "@/entities/search/types";
 import { create } from "zustand";
 
-export const useSearchStore = create<SearchState>((set, get) => ({
+export const useSearchStore = create<SearchStore>((set, get) => ({
   // 화면에 보이는 검색어 상태 값
   pageInputValue: "",
   modalInputValue: "",
@@ -15,11 +15,20 @@ export const useSearchStore = create<SearchState>((set, get) => ({
   setModalSelectValue: (value: SearchTargetOptions) =>
     set({ modalSelectValue: value }),
 
-  pageSearch: () =>
+  pageSearch: (keyword?: string) => {
+    if (keyword) {
+      set({
+        pageInputValue: keyword,
+        searchKeyword: keyword,
+        searchTarget: undefined,
+      });
+      return;
+    }
     set({
       searchKeyword: get().pageInputValue,
       searchTarget: undefined,
-    }),
+    });
+  },
   modalSearch: () =>
     set({
       searchKeyword: get().modalInputValue,
