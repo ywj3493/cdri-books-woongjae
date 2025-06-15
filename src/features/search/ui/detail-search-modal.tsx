@@ -1,25 +1,24 @@
-import { DetailSearchSelect } from "@/entities/search/ui/detail-search-select";
+import { DetailSearchSelect } from "@/entities/search/ui";
 import { useOutsideClickEffect } from "@/shared/hooks";
 import { Button, XIcon } from "@/shared/ui";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useSearchStore } from "../hooks/use-search-store";
 
-interface DetailSearchModalProps {
-  onSearch?: (
-    keyword: string,
-    selected: "title" | "author" | "publisher",
-  ) => void;
-}
-
-export function DetailSearchModal({ onSearch }: DetailSearchModalProps) {
+export function DetailSearchModal() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState<"title" | "author" | "publisher">(
-    "title",
-  );
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const modalRef = useRef<HTMLDivElement>(null);
+  const modalContainerRef = useRef<HTMLDivElement>(null);
+  const openRef = useRef(false);
 
-  const openModal = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const {
+    modalInputValue,
+    setModalInputValue,
+    modalSearch,
+    resetPageSearchInput,
+  } = useSearchStore();
+
+  const openModal = (event: React.MouseEvent) => {
+    event.stopPropagation();
     setIsOpen(true);
   };
 
@@ -27,46 +26,55 @@ export function DetailSearchModal({ onSearch }: DetailSearchModalProps) {
     setIsOpen(false);
   };
 
-  const detailSearchBooks = () => {
-    if (onSearch) {
-      onSearch(searchInputRef.current?.value ?? "", selected);
-    }
+  const changeModalInputValue = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setModalInputValue(event.target.value);
   };
 
-  useOutsideClickEffect(modalRef, () => {
-    if (isOpen) {
-      setIsOpen(false);
+  const detailSearchBooks = () => {
+    modalSearch();
+    closeModal();
+  };
+
+  useOutsideClickEffect(modalContainerRef, closeModal);
+
+  useEffect(() => {
+    if (isOpen && !openRef.current) {
+      openRef.current = true;
+      resetPageSearchInput();
+    } else if (!isOpen) {
+      openRef.current = false;
     }
-  });
+  }, [resetPageSearchInput, isOpen]);
 
   return (
-    <div>
+    <>
       <Button variant="outline" onClick={openModal}>
         상세 검색
       </Button>
       {isOpen && (
         <div
-          ref={modalRef}
+          ref={modalContainerRef}
           className="flex flex-col shadow-lg max-w-80 px-6 pb-9 rounded-xl"
         >
           <div className="w-full flex justify-end items-center">
             <XIcon width={12} height={12} color={"gray"} onClick={closeModal} />
           </div>
           <div className="flex">
-            <DetailSearchSelect
-              selected={selected}
-              onChange={(selected) => setSelected(selected)}
-            />
+            <DetailSearchSelect />
             <input
               type="text"
               ref={searchInputRef}
+              value={modalInputValue}
               placeholder="검색어를 입력하세요"
               className="w-full mt-2 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cdri-primary"
-              onFocus={() => {
-                console.log("Input focused");
-              }}
-              onBlur={() => {
-                console.log("Input blurred");
+              onChange={changeModalInputValue}
+              onKeyDown={(event) => {
+                if (event.key !== "Enter") {
+                  return;
+                }
+                detailSearchBooks();
               }}
             />
           </div>
@@ -79,6 +87,6 @@ export function DetailSearchModal({ onSearch }: DetailSearchModalProps) {
           </Button>
         </div>
       )}
-    </div>
+    </>
   );
 }

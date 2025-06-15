@@ -11,6 +11,7 @@ export function BookListItem({ book }: BookListItemProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const { title, authors, thumbnail, salePriceTag, priceTag, contents } =
     Book.create(book);
+
   return (
     <li
       className={`grid grid-cols-[auto_1fr_auto] items-start border-b border-[#D2D6DA] pl-12 pr-4 px-4 pt-4 transition-all duration-300 ${isExpanded ? "h-[344px]" : "h-25"}`}

@@ -46,13 +46,13 @@ export async function getSearchBooks(
       },
     });
     if (!response.ok) {
-      throw new Error();
+      throw new Error(response.statusText);
     }
     const data: KakaoSearchBooksResponse = await response.json();
     return data;
   } catch (error) {
-    console.error("Error fetching books:", error);
-    throw error; // Re-throw the error for further handling if needed
+    console.error(`Error: /search/book?${queryParams}`, error);
+    throw error;
   }
 }
 
