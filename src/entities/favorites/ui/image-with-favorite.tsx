@@ -8,8 +8,8 @@ interface ImageWithFavoriteProps
 }
 
 export function FavoriteImage({
-  src: unsafedSrc,
-  alt: unsafedAlt,
+  src: unsafeSrc,
+  alt: unsafeAlt,
   isFavorite,
   isExpanded = false,
   onChangeFavorite,
@@ -21,8 +21,8 @@ export function FavoriteImage({
     }
   };
 
-  const altText = unsafedAlt || "";
-  const src = unsafedSrc || "/assets/icon_book.png";
+  const altText = unsafeAlt || "";
+  const src = unsafeSrc || "/assets/icon_book.png";
 
   return (
     <div className="relative inline-block">
