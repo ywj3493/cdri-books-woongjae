@@ -24,6 +24,10 @@ export function BookListItem({
     onToggleFavorite?.(bookEntity);
   };
 
+  const navigateToDetailPage = () => {
+    window.open(`/books/${bookEntity.isbn}`, "_blank");
+  };
+
   return (
     <li
       className={`grid grid-cols-[auto_1fr_auto] gap-12 items-start border-b border-[#D2D6DA] pl-12 pr-4 px-4 pt-4 transition-all duration-300 ${isExpanded ? "h-[344px]" : "h-25"}`}
@@ -72,6 +76,7 @@ export function BookListItem({
             <Button
               variant="primary"
               className={`w-60 py-3 ${isExpanded ? "" : "hidden"}`}
+              onClick={navigateToDetailPage}
             >
               구매하기
             </Button>
@@ -86,6 +91,7 @@ export function BookListItem({
             <Button
               variant="primary"
               className={`w-[115px] py-3 ${isExpanded ? "hidden" : ""}`}
+              onClick={navigateToDetailPage}
             >
               구매하기
             </Button>

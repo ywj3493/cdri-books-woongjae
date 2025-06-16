@@ -4,6 +4,7 @@ import { Layout } from "@/widgets/layout";
 import { SearchBooksPage } from "@/pages/search";
 import { FavoriteBooksPage } from "@/pages/favorites";
 import { QueryProvider } from "@/shared/providers";
+import { BookDetailPage } from "@/pages/books";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
               <Route path="/" element={<Navigate to="/search" />} />
               <Route path="/search" element={<SearchBooksPage />} />
               <Route path="/favorites" element={<FavoriteBooksPage />} />
+              <Route path="/books/:isbn" element={<BookDetailPage />} />
             </Routes>
           </Layout>
         </BrowserRouter>
