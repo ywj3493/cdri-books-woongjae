@@ -5,6 +5,7 @@ import { SearchBooksPage } from "@/pages/search";
 import { FavoriteBooksPage } from "@/pages/favorites";
 import { QueryProvider } from "@/shared/providers";
 import { BookDetailPage } from "@/pages/books";
+import { TooltipProvider } from "@/shared/ui";
 
 export default function App() {
   return (
@@ -13,15 +14,17 @@ export default function App() {
         <BrowserRouter
           future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
         >
-          <Header />
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Navigate to="/search" />} />
-              <Route path="/search" element={<SearchBooksPage />} />
-              <Route path="/favorites" element={<FavoriteBooksPage />} />
-              <Route path="/books/:isbn" element={<BookDetailPage />} />
-            </Routes>
-          </Layout>
+          <TooltipProvider>
+            <Header />
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Navigate to="/search" />} />
+                <Route path="/search" element={<SearchBooksPage />} />
+                <Route path="/favorites" element={<FavoriteBooksPage />} />
+                <Route path="/books/:isbn" element={<BookDetailPage />} />
+              </Routes>
+            </Layout>
+          </TooltipProvider>
         </BrowserRouter>
       </QueryProvider>
     </main>
