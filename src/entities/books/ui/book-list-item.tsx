@@ -1,6 +1,12 @@
 import { useState } from "react";
 import type { KakaoBookDocument } from "@/features/books";
-import { ArrowIcon, Button } from "@/shared/ui";
+import {
+  ArrowIcon,
+  Button,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/shared/ui";
 import { FavoriteImage } from "@/entities/favorites";
 import { Book } from "../model/book";
 import { DetailPrice } from "./detail-price";
@@ -44,10 +50,20 @@ export function BookListItem({
       {/* 제목, 저자, 책 소개 부분 */}
       <div className="flex flex-col gap-2 h-full mt-5">
         <div className="flex items-center gap-4">
-          <h3 className="text-cdri-title3 line-clamp-1">{title}</h3>
-          <p className="text-cdri-body2 text-cdri-text-subtitle line-clamp-1">
-            {authors.join(", ")}
-          </p>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <h3 className="text-cdri-title3 line-clamp-1">{title}</h3>
+            </TooltipTrigger>
+            <TooltipContent>{title}</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <p className="text-cdri-body2 text-cdri-text-subtitle line-clamp-1">
+                {authors.join(", ")}
+              </p>
+            </TooltipTrigger>
+            <TooltipContent>{authors.join(", ")}</TooltipContent>
+          </Tooltip>
         </div>
         {isExpanded && (
           <div className="flex flex-col gap-3 mt-4">
