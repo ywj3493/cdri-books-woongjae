@@ -1,13 +1,33 @@
-import { BookListItem } from "@/entities/books";
+import {
+  BookListItem,
+  BookListItemSkeleton,
+  EmptyBookList,
+} from "@/entities/books";
 import type { Book } from "@/entities/books";
 import { useFavoritesStore } from "@/features/favorites";
 
 interface BookListProps {
+  isLoading?: boolean;
   bookList: Book[];
 }
 
-export function BookList({ bookList }: BookListProps) {
+export function BookList({ isLoading, bookList }: BookListProps) {
   const { isFavorite, toggleFavorite } = useFavoritesStore();
+
+  if (isLoading) {
+    return (
+      <ul className="max-w-240">
+        {Array.from({ length: 5 }, () => (
+          <BookListItemSkeleton
+            key={`book_list_item_skeleton:${Math.random()}`}
+          />
+        ))}
+      </ul>
+    );
+  }
+  if (bookList.length === 0) {
+    return <EmptyBookList message="검색된 결과가 없습니다." />;
+  }
   return (
     <ul className="max-w-240">
       {bookList.map((book) => (

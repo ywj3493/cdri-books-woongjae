@@ -3,6 +3,7 @@ import { FavoriteIconEmpty, FavoriteIconFilled } from "@/shared/ui";
 interface ImageWithFavoriteProps
   extends React.ImgHTMLAttributes<HTMLImageElement> {
   isFavorite: boolean;
+  isExpanded?: boolean;
   onChangeFavorite?: (isFavorite: boolean) => void;
 }
 
@@ -10,6 +11,7 @@ export function FavoriteImage({
   src: unsafedSrc,
   alt: unsafedAlt,
   isFavorite,
+  isExpanded = false,
   onChangeFavorite,
   ...props
 }: ImageWithFavoriteProps) {
@@ -29,12 +31,14 @@ export function FavoriteImage({
         {isFavorite ? (
           <FavoriteIconFilled
             onClick={toggleFavorite}
-            className="w-[100%] h-[100%]"
+            width={isExpanded ? 20 : 13}
+            height={isExpanded ? 18 : 13}
           />
         ) : (
           <FavoriteIconEmpty
             onClick={toggleFavorite}
-            className="w-[100%] h-[100%]"
+            width={isExpanded ? 20 : 13}
+            height={isExpanded ? 18 : 13}
           />
         )}
       </div>

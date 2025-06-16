@@ -1,15 +1,16 @@
-import { Book, EmptyBookList } from "@/entities/books";
+import { Book } from "@/entities/books";
 import { BookList, useGetSearchBooksQuery } from "@/features/books";
 import {
   DetailSearchModal,
   SearchInput,
   useSearchStore,
 } from "@/features/search";
+import { keepPreviousData } from "@tanstack/react-query";
 
 export function SearchBooksPage() {
   const { searchKeyword, searchTarget } = useSearchStore();
 
-  const { data: searchBooksData } = useGetSearchBooksQuery(
+  const { data: searchBooksData, isLoading } = useGetSearchBooksQuery(
     searchKeyword,
     "accuracy",
     1,
@@ -22,12 +23,10 @@ export function SearchBooksPage() {
           documents: data.documents.map(Book.create),
         }),
         enabled: !!searchKeyword,
+        placeholderData: keepPreviousData,
       },
     },
   );
-
-  const isSearchEmpty =
-    !searchBooksData || searchBooksData.documents.length === 0;
 
   return (
     <section className="mx-auto p-4 flex flex-col gap-6">
@@ -41,16 +40,15 @@ export function SearchBooksPage() {
         <span>
           총{" "}
           <span className="text-cdri-primary">
-            {searchBooksData?.meta.total_count || 0}
+            {searchBooksData?.meta.total_count ?? 0}
           </span>
           건
         </span>
       </p>
-      {isSearchEmpty ? (
-        <EmptyBookList message="검색된 결과가 없습니다." />
-      ) : (
-        <BookList bookList={searchBooksData.documents} />
-      )}
+      <BookList
+        bookList={searchBooksData?.documents ?? []}
+        isLoading={isLoading}
+      />
     </section>
   );
 }

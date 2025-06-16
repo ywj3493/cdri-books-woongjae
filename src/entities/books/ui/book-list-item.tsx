@@ -33,14 +33,15 @@ export function BookListItem({
         src={thumbnail}
         alt={title}
         isFavorite={isFavorite}
+        isExpanded={isExpanded}
         onChangeFavorite={toggleFavorite}
         className={`transition-all duration-300 ${isExpanded ? "w-52.5 h-70" : "w-12 h-17"} object-cover`}
       />
       {/* 제목, 저자, 책 소개 부분 */}
       <div className="flex flex-col gap-2 h-full mt-5">
-        <div className="flex items-center gap-1">
-          <h3 className="text-cdri-title3">{title}</h3>
-          <p className="text-cdri-body2 text-cdri-text-subtitle">
+        <div className="flex items-center gap-4">
+          <h3 className="text-cdri-title3 line-clamp-1">{title}</h3>
+          <p className="text-cdri-body2 text-cdri-text-subtitle line-clamp-1">
             {authors.join(", ")}
           </p>
         </div>

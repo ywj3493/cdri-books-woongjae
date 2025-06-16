@@ -35,7 +35,10 @@
     @apply text-base leading-4 font-medium tracking-normal font-noto-sans-kr;
   }
   .text-cdri-small {
-    @apply text-[10px] leading-[10px] font-medium tracking-normal font-noto-sans-kr;
+    @apply text-[10px] leading-4 font-medium tracking-normal font-noto-sans-kr;
+  }
+  .text-cdri-tiny {
+    @apply text-[10px] leading-5.5 font-medium tracking-normal font-noto-sans-kr;
   }
 }
 
