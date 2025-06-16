@@ -20,7 +20,9 @@ export function SearchInput() {
 
   const isDropdownOpen = isInputFocused && searchHistory.length > 0;
 
-  const searchBooks = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const searchBooksWithKeyDown = (
+    event: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
     if (event.key !== "Enter") {
       return;
     }
@@ -58,7 +60,10 @@ export function SearchInput() {
   useOutsideClickEffect(searchContainerRef, closeDropdown);
 
   return (
-    <div ref={searchContainerRef} className="relative max-w-120">
+    <div
+      ref={searchContainerRef}
+      className="relative max-w-120 flex-grow w-full"
+    >
       <div
         className={cn(
           `flex items-center gap-3 bg-cdri-light-gray p-[15px] ${isDropdownOpen ? "rounded-t-[27px] rounded-b-none" : "rounded-full"}`,
@@ -72,7 +77,7 @@ export function SearchInput() {
           className="focus:outline-none"
           onChange={changeDisplayInput}
           onFocus={openDropdownAndModalReset}
-          onKeyDown={searchBooks}
+          onKeyDown={searchBooksWithKeyDown}
         />
       </div>
       {isDropdownOpen && (

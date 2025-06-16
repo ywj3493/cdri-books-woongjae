@@ -26,7 +26,7 @@ export function BookListItem({
 
   return (
     <li
-      className={`grid grid-cols-[auto_1fr_auto] items-start border-b border-[#D2D6DA] pl-12 pr-4 px-4 pt-4 transition-all duration-300 ${isExpanded ? "h-[344px]" : "h-25"}`}
+      className={`grid grid-cols-[auto_1fr_auto] gap-12 items-start border-b border-[#D2D6DA] pl-12 pr-4 px-4 pt-4 transition-all duration-300 ${isExpanded ? "h-[344px]" : "h-25"}`}
     >
       {/* 썸네일 부분 */}
       <FavoriteImage
@@ -37,7 +37,7 @@ export function BookListItem({
         className={`transition-all duration-300 ${isExpanded ? "w-52.5 h-70" : "w-12 h-17"} object-cover`}
       />
       {/* 제목, 저자, 책 소개 부분 */}
-      <div className="ml-12 flex flex-col gap-2 h-full mt-5">
+      <div className="flex flex-col gap-2 h-full mt-5">
         <div className="flex items-center gap-1">
           <h3 className="text-cdri-title3">{title}</h3>
           <p className="text-cdri-body2 text-cdri-text-subtitle">
@@ -45,9 +45,9 @@ export function BookListItem({
           </p>
         </div>
         {isExpanded && (
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 mt-4">
             <h4 className="text-cdri-title3">책 소개</h4>
-            <p className="text-cdri-small whitespace-pre-line">{contents}</p>
+            <p className="text-cdri-small">{contents}</p>
           </div>
         )}
       </div>
@@ -57,7 +57,7 @@ export function BookListItem({
         <div className="flex flex-col justify-between items-end h-full pb-10">
           <Button
             variant="secondary"
-            className="mb-2 gap-1"
+            className="mb-2"
             onClick={() => setIsExpanded(!isExpanded)}
           >
             상세보기{" "}
@@ -70,7 +70,7 @@ export function BookListItem({
             <DetailPrice priceTag={priceTag} salePriceTag={salePriceTag} />
             <Button
               variant="primary"
-              className={`w-60 ${isExpanded ? "" : "hidden"}`}
+              className={`w-60 py-3 ${isExpanded ? "" : "hidden"}`}
             >
               구매하기
             </Button>
@@ -84,13 +84,13 @@ export function BookListItem({
           <div>
             <Button
               variant="primary"
-              className={`w-[115px] ${isExpanded ? "hidden" : ""}`}
+              className={`w-[115px] py-3 ${isExpanded ? "hidden" : ""}`}
             >
               구매하기
             </Button>
             <Button
               variant="secondary"
-              className="ml-2 gap-1"
+              className="ml-2 gap-1 w-[115px] py-3"
               onClick={() => setIsExpanded(!isExpanded)}
             >
               상세보기{" "}

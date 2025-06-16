@@ -1,8 +1,8 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Header } from "@/widgets/header";
 import { Layout } from "@/widgets/layout";
-import { SearchBooksPage } from "@/pages/search/ui";
-import { FavoriteBooksPage } from "@/pages/favorites/ui";
+import { SearchBooksPage } from "@/pages/search";
+import { FavoriteBooksPage } from "@/pages/favorites";
 import { QueryProvider } from "@/shared/providers";
 
 export default function App() {

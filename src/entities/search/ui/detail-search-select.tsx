@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useOutsideClickEffect } from "@/shared/hooks";
 import { ArrowIcon } from "@/shared/ui";
 import type { SearchTargetOptions } from "@/entities/search";
@@ -36,10 +36,10 @@ export function DetailSearchSelect({
   });
 
   return (
-    <>
+    <div className="relative">
       <button
         type="button"
-        className="flex justify-between items-center w-25 p-2 border-b border-cdri-primary"
+        className="flex justify-between items-center w-25 p-2 border-b border-[#D2D6DA]"
         onClick={openSelect}
       >
         <span>{selectOptionMap[selected]}</span>
@@ -48,29 +48,29 @@ export function DetailSearchSelect({
       {isOpen && (
         <ul
           ref={selectListRef}
-          className="absolute bg-cdri-white border shadow-lg w-25 z-10"
+          className="absolute mt-1 px-2 py-1 shadow-xl bg-cdri-white border border-cdri-light-gray w-25 z-10 text-[#8D94A0] flex flex-col gap-1"
         >
           {(Object.keys(selectOptionMap) as SearchTargetOptions[]).map(
             (option) => {
-              return (
-                <Fragment key={`detail-search-select-option-${option}`}>
-                  {option !== selected && (
-                    <li
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        selectOption(option);
-                      }}
-                      onKeyDown={() => selectOption(option)}
-                    >
-                      {selectOptionMap[option]}
-                    </li>
-                  )}
-                </Fragment>
-              );
+              if (option !== selected) {
+                return (
+                  <li
+                    key={`detail-search-select-option-${option}`}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      selectOption(option);
+                    }}
+                    onKeyDown={() => selectOption(option)}
+                  >
+                    {selectOptionMap[option]}
+                  </li>
+                );
+              }
+              return null;
             },
           )}
         </ul>
       )}
-    </>
+    </div>
   );
 }
