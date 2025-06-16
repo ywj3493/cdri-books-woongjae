@@ -1,3 +1,4 @@
+import { keepPreviousData } from "@tanstack/react-query";
 import { Book } from "@/entities/books";
 import { BookList, useGetSearchBooksQuery } from "@/features/books";
 import {
@@ -5,7 +6,6 @@ import {
   SearchInput,
   useSearchStore,
 } from "@/features/search";
-import { keepPreviousData } from "@tanstack/react-query";
 
 export function SearchBooksPage() {
   const { searchKeyword, searchTarget } = useSearchStore();
