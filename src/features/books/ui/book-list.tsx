@@ -9,7 +9,7 @@ interface BookListProps {
 export function BookList({ bookList }: BookListProps) {
   const { isFavorite, toggleFavorite } = useFavoritesStore();
   return (
-    <ul>
+    <ul className="max-w-240">
       {bookList.map((book) => (
         <BookListItem
           key={book.isbn}

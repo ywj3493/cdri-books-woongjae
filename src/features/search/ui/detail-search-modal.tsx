@@ -58,19 +58,19 @@ export function DetailSearchModal() {
   }, [resetPageSearchInput, isOpen]);
 
   return (
-    <>
-      <Button variant="outline" onClick={openModal}>
-        상세 검색
+    <div className="relative w-full h-auto">
+      <Button variant="outline" className="h-9 w-18 " onClick={openModal}>
+        상세검색
       </Button>
       {isOpen && (
         <div
           ref={modalContainerRef}
-          className="flex flex-col shadow-lg max-w-80 px-6 pb-9 rounded-xl"
+          className="absolute -left-30 bg-cdri-white mt-4 flex flex-col shadow-lg w-80 pt-2 px-6 pb-9 rounded-xl"
         >
           <div className="w-full flex justify-end items-center">
             <XIcon width={12} height={12} color={"gray"} onClick={closeModal} />
           </div>
-          <div className="flex">
+          <div className="flex gap-1 items-center">
             <DetailSearchSelect
               selected={modalSelectValue}
               onSelect={changeModalSelectValue}
@@ -79,8 +79,8 @@ export function DetailSearchModal() {
               type="text"
               ref={searchInputRef}
               value={modalInputValue}
-              placeholder="검색어를 입력하세요"
-              className="w-full mt-2 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cdri-primary"
+              placeholder="검색어 입력"
+              className="w-full p-2 border-b border-b-cdri-primary focus:outline-none"
               onChange={changeModalInputValue}
               onKeyDown={(event) => {
                 if (event.key !== "Enter") {
@@ -92,13 +92,13 @@ export function DetailSearchModal() {
           </div>
           <Button
             variant="primary"
-            className="mt-4"
+            className="mt-4 h-9 w-full text-cdri-caption text-cdri-white"
             onClick={detailSearchBooks}
           >
-            검색 하기
+            검색하기
           </Button>
         </div>
       )}
-    </>
+    </div>
   );
 }

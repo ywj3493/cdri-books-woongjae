@@ -30,9 +30,9 @@ export function SearchBooksPage() {
     !searchBooksData || searchBooksData.documents.length === 0;
 
   return (
-    <section className="h-screen max-w-[960px] mx-auto p-4 flex flex-col gap-6">
+    <section className="mx-auto p-4 flex flex-col gap-6">
       <h1 className="text-cdri-title2">도서 검색</h1>
-      <div>
+      <div className="flex items-center gap-4">
         <SearchInput />
         <DetailSearchModal />
       </div>

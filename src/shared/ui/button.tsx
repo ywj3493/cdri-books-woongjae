@@ -2,15 +2,15 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/shared/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center px-5 py-[13px] rounded-lg cursor-pointer",
+  "inline-flex items-center justify-center rounded-lg cursor-pointer gap-2 whitespace-nowrap",
   {
     variants: {
       variant: {
-        primary: "bg-cdri-primary text-cdri-white",
+        primary: "bg-cdri-primary text-cdri-white w-[115px] py-3",
         secondary:
-          "bg-cdri-light-gray text-cdri-caption text-cdri-text-secondary",
+          "bg-cdri-light-gray text-cdri-caption text-cdri-text-secondary w-[115px] py-3",
         outline:
-          "bg-cdri-white text-cdri-text-subtitle border border-cdri-light-gray",
+          "bg-cdri-white text-cdri-text-subtitle border border-cdri-gray",
       },
       defaultVariants: {
         variant: "primary",
