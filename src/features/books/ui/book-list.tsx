@@ -17,7 +17,7 @@ export function BookList({ isLoading, bookList }: BookListProps) {
   if (isLoading) {
     return (
       <ul className="max-w-240">
-        {Array.from({ length: 5 }, () => (
+        {Array.from({ length: 10 }, () => (
           <BookListItemSkeleton
             key={`book_list_item_skeleton:${Math.random()}`}
           />
