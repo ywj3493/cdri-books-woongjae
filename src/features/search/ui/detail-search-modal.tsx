@@ -5,7 +5,7 @@ import {
   type SearchTargetOptions,
   DetailSearchSelect,
 } from "@/entities/search";
-import { useSearchStore } from "../hooks";
+import { useSearchHistoryStore, useSearchStore } from "../hooks";
 
 export function DetailSearchModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +21,7 @@ export function DetailSearchModal() {
     modalSearch,
     resetPageSearchInput,
   } = useSearchStore();
+  const { addSearchHistory } = useSearchHistoryStore();
 
   const openModal = (event: React.MouseEvent) => {
     event.stopPropagation();
@@ -44,6 +45,9 @@ export function DetailSearchModal() {
   const detailSearchBooks = () => {
     modalSearch();
     closeModal();
+    if (modalInputValue.trim() !== "") {
+      addSearchHistory(modalInputValue);
+    }
   };
 
   useOutsideClickEffect(modalContainerRef, closeModal);
